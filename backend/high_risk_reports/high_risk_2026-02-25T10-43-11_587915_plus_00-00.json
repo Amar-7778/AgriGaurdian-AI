@@ -1,0 +1,77 @@
+{
+  "timestamp": "2026-02-25T10:43:11.587915+00:00",
+  "temperature": 30.96,
+  "humidity": 80.85,
+  "rain_forecast": 0.57,
+  "soil_moisture": 71.98,
+  "wind_speed": 1.39,
+  "leaf_wetness": 75.75,
+  "soil_temperature": 27.88,
+  "soil_ph": 6.59,
+  "solar_radiation": 550.83,
+  "crop_type": "maize",
+  "rolling_temp_avg": 24.5,
+  "rolling_humidity_avg": 70.64,
+  "rolling_leaf_wetness_avg": 62.75,
+  "humidity_alert": true,
+  "weather_condition": "Stable",
+  "anomaly_score": 2.863,
+  "risk_score": 78,
+  "risk_level": "HIGH",
+  "reasons": [
+    "Humidity is above 80%, creating fungal-friendly conditions.",
+    "Leaf wetness is elevated, increasing fungal germination likelihood.",
+    "Soil moisture is high, supporting pathogen persistence.",
+    "Low wind speed can reduce canopy drying.",
+    "Soil temperature supports disease development dynamics.",
+    "Recent sensor pattern deviates from rolling baseline."
+  ],
+  "suggested_actions": [
+    "Increase field scouting frequency to twice daily.",
+    "Improve air circulation and avoid overhead irrigation.",
+    "Prepare targeted fungicide plan based on local agronomy guidance."
+  ],
+  "predicted_disease": "Northern leaf blight risk",
+  "disease_confidence": 66,
+  "disease_suggestions": [
+    "Scout for elongated gray-green lesions in lower to mid canopy.",
+    "Improve residue management and maintain field airflow.",
+    "Use targeted fungicide only if disease pressure escalates and thresholds are met."
+  ],
+  "outbreak_eta_hours": 6,
+  "outbreak_window": "Critical window: within 12 hours",
+  "forecast_trajectory": [
+    {
+      "hours": 12,
+      "risk_score": 89
+    },
+    {
+      "hours": 24,
+      "risk_score": 86
+    },
+    {
+      "hours": 48,
+      "risk_score": 81
+    },
+    {
+      "hours": 72,
+      "risk_score": 76
+    }
+  ],
+  "action_plan": {
+    "do_now": [
+      "Trigger high-risk protocol and notify field supervisor.",
+      "Scout for elongated gray-green lesions in lower to mid canopy.",
+      "Improve residue management and maintain field airflow."
+    ],
+    "today": [
+      "Increase field scouting frequency to twice daily.",
+      "Improve air circulation and avoid overhead irrigation.",
+      "Capture geo-tagged photos and lesion notes from scouting zones."
+    ],
+    "this_week": [
+      "Review disease progression trend and recalibrate intervention thresholds.",
+      "Validate fungicide rotation and compliance with local advisory rules."
+    ]
+  }
+}

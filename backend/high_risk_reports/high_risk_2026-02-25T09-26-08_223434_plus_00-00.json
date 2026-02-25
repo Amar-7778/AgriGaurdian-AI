@@ -1,0 +1,78 @@
+{
+  "timestamp": "2026-02-25T09:26:08.223434+00:00",
+  "temperature": 26.57,
+  "humidity": 84.68,
+  "rain_forecast": 0.57,
+  "soil_moisture": 84.8,
+  "wind_speed": 6.39,
+  "leaf_wetness": 73.5,
+  "soil_temperature": 23.8,
+  "soil_ph": 5.67,
+  "solar_radiation": 504.51,
+  "crop_type": "rice",
+  "rolling_temp_avg": 26.43,
+  "rolling_humidity_avg": 72.95,
+  "rolling_leaf_wetness_avg": 66.56,
+  "humidity_alert": true,
+  "weather_condition": "Stable",
+  "anomaly_score": 2.32,
+  "risk_score": 99,
+  "risk_level": "HIGH",
+  "reasons": [
+    "Humidity is above 80%, creating fungal-friendly conditions.",
+    "Temperature is in the 20\u201330\u00b0C fungal growth range.",
+    "Leaf wetness is elevated, increasing fungal germination likelihood.",
+    "Soil moisture is high, supporting pathogen persistence.",
+    "Soil temperature supports disease development dynamics.",
+    "Soil pH is outside the preferred range, increasing plant stress.",
+    "Recent sensor pattern deviates from rolling baseline."
+  ],
+  "suggested_actions": [
+    "Increase field scouting frequency to twice daily.",
+    "Improve air circulation and avoid overhead irrigation.",
+    "Prepare targeted fungicide plan based on local agronomy guidance."
+  ],
+  "predicted_disease": "Rice blast risk",
+  "disease_confidence": 84,
+  "disease_suggestions": [
+    "Avoid excess nitrogen applications during high-risk humid windows.",
+    "Maintain optimal spacing and water management to limit prolonged wetness.",
+    "Apply targeted fungicide only when threshold is confirmed by local guidelines."
+  ],
+  "outbreak_eta_hours": 6,
+  "outbreak_window": "Critical window: within 12 hours",
+  "forecast_trajectory": [
+    {
+      "hours": 12,
+      "risk_score": 100
+    },
+    {
+      "hours": 24,
+      "risk_score": 100
+    },
+    {
+      "hours": 48,
+      "risk_score": 99
+    },
+    {
+      "hours": 72,
+      "risk_score": 94
+    }
+  ],
+  "action_plan": {
+    "do_now": [
+      "Trigger high-risk protocol and notify field supervisor.",
+      "Avoid excess nitrogen applications during high-risk humid windows.",
+      "Maintain optimal spacing and water management to limit prolonged wetness."
+    ],
+    "today": [
+      "Increase field scouting frequency to twice daily.",
+      "Improve air circulation and avoid overhead irrigation.",
+      "Capture geo-tagged photos and lesion notes from scouting zones."
+    ],
+    "this_week": [
+      "Review disease progression trend and recalibrate intervention thresholds.",
+      "Validate fungicide rotation and compliance with local advisory rules."
+    ]
+  }
+}

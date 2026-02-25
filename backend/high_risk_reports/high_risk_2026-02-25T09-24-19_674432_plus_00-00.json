@@ -1,0 +1,76 @@
+{
+  "timestamp": "2026-02-25T09:24:19.674432+00:00",
+  "temperature": 33.11,
+  "humidity": 84.69,
+  "rain_forecast": 0.48,
+  "soil_moisture": 74.57,
+  "wind_speed": 0.59,
+  "leaf_wetness": 82.67,
+  "soil_temperature": 31.34,
+  "soil_ph": 6.71,
+  "solar_radiation": 293.56,
+  "crop_type": "tomato",
+  "rolling_temp_avg": 25.3,
+  "rolling_humidity_avg": 66.61,
+  "rolling_leaf_wetness_avg": 58.84,
+  "humidity_alert": true,
+  "weather_condition": "Stable",
+  "anomaly_score": 3.826,
+  "risk_score": 75,
+  "risk_level": "HIGH",
+  "reasons": [
+    "Humidity is above 80%, creating fungal-friendly conditions.",
+    "Leaf wetness is elevated, increasing fungal germination likelihood.",
+    "Soil moisture is high, supporting pathogen persistence.",
+    "Low wind speed can reduce canopy drying.",
+    "Recent sensor pattern deviates from rolling baseline."
+  ],
+  "suggested_actions": [
+    "Increase field scouting frequency to twice daily.",
+    "Improve air circulation and avoid overhead irrigation.",
+    "Prepare targeted fungicide plan based on local agronomy guidance."
+  ],
+  "predicted_disease": "Early blight (Alternaria) risk",
+  "disease_confidence": 72,
+  "disease_suggestions": [
+    "Remove infected lower leaves and sanitize tools after handling plants.",
+    "Use preventive fungicide strategy with active ingredient rotation.",
+    "Avoid overhead irrigation in late afternoon and evening."
+  ],
+  "outbreak_eta_hours": 6,
+  "outbreak_window": "Critical window: within 12 hours",
+  "forecast_trajectory": [
+    {
+      "hours": 12,
+      "risk_score": 86
+    },
+    {
+      "hours": 24,
+      "risk_score": 83
+    },
+    {
+      "hours": 48,
+      "risk_score": 78
+    },
+    {
+      "hours": 72,
+      "risk_score": 73
+    }
+  ],
+  "action_plan": {
+    "do_now": [
+      "Trigger high-risk protocol and notify field supervisor.",
+      "Remove infected lower leaves and sanitize tools after handling plants.",
+      "Use preventive fungicide strategy with active ingredient rotation."
+    ],
+    "today": [
+      "Increase field scouting frequency to twice daily.",
+      "Improve air circulation and avoid overhead irrigation.",
+      "Capture geo-tagged photos and lesion notes from scouting zones."
+    ],
+    "this_week": [
+      "Review disease progression trend and recalibrate intervention thresholds.",
+      "Validate fungicide rotation and compliance with local advisory rules."
+    ]
+  }
+}

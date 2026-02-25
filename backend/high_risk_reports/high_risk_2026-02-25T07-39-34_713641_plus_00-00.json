@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-02-25T07:39:34.713641+00:00",
+  "temperature": 20.4,
+  "humidity": 83.69,
+  "rain_forecast": 0.14,
+  "soil_moisture": 39.04,
+  "wind_speed": 1.57,
+  "leaf_wetness": 65.46,
+  "soil_temperature": 17.18,
+  "soil_ph": 7.44,
+  "solar_radiation": 217.21,
+  "crop_type": "wheat",
+  "rolling_temp_avg": 22.83,
+  "rolling_humidity_avg": 75.83,
+  "rolling_leaf_wetness_avg": 65.6,
+  "humidity_alert": true,
+  "weather_condition": "Stable",
+  "anomaly_score": 1.479,
+  "risk_score": 81,
+  "risk_level": "HIGH",
+  "reasons": [
+    "Humidity is above 80%, creating fungal-friendly conditions.",
+    "Temperature is in the 20\u201330\u00b0C fungal growth range.",
+    "Low wind speed can reduce canopy drying.",
+    "Soil pH is outside the preferred range, increasing plant stress.",
+    "Low solar radiation with high humidity may prolong canopy wetness.",
+    "Recent sensor pattern deviates from rolling baseline."
+  ],
+  "suggested_actions": [
+    "Increase field scouting frequency to twice daily.",
+    "Improve air circulation and avoid overhead irrigation.",
+    "Prepare targeted fungicide plan based on local agronomy guidance."
+  ],
+  "predicted_disease": "Leaf rust risk",
+  "disease_confidence": 68,
+  "disease_suggestions": [
+    "Increase scouting around dense and shaded sections of the field.",
+    "Prioritize resistant varieties and timely foliar protection if thresholds are met.",
+    "Avoid unnecessary late irrigation that increases canopy humidity."
+  ]
+}

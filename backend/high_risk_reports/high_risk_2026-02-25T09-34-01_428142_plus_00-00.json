@@ -1,0 +1,76 @@
+{
+  "timestamp": "2026-02-25T09:34:01.428142+00:00",
+  "temperature": 21.89,
+  "humidity": 77.01,
+  "rain_forecast": 0.84,
+  "soil_moisture": 50.35,
+  "wind_speed": 6.17,
+  "leaf_wetness": 74.99,
+  "soil_temperature": 19.38,
+  "soil_ph": 5.98,
+  "solar_radiation": 152.97,
+  "crop_type": "potato",
+  "rolling_temp_avg": 25.7,
+  "rolling_humidity_avg": 68.74,
+  "rolling_leaf_wetness_avg": 62.62,
+  "humidity_alert": false,
+  "weather_condition": "Stable",
+  "anomaly_score": 1.525,
+  "risk_score": 76,
+  "risk_level": "HIGH",
+  "reasons": [
+    "Temperature is in the 20\u201330\u00b0C fungal growth range.",
+    "Rain is forecasted, increasing leaf wetness duration.",
+    "Leaf wetness is elevated, increasing fungal germination likelihood.",
+    "Soil temperature supports disease development dynamics.",
+    "Recent sensor pattern deviates from rolling baseline."
+  ],
+  "suggested_actions": [
+    "Increase field scouting frequency to twice daily.",
+    "Improve air circulation and avoid overhead irrigation.",
+    "Prepare targeted fungicide plan based on local agronomy guidance."
+  ],
+  "predicted_disease": "Late blight risk",
+  "disease_confidence": 76,
+  "disease_suggestions": [
+    "Start preventive blight spray schedule based on local advisory guidance.",
+    "Improve field drainage and avoid dense canopy humidity pockets.",
+    "Scout high-risk zones twice daily after rainfall windows."
+  ],
+  "outbreak_eta_hours": 6,
+  "outbreak_window": "Critical window: within 12 hours",
+  "forecast_trajectory": [
+    {
+      "hours": 12,
+      "risk_score": 85
+    },
+    {
+      "hours": 24,
+      "risk_score": 82
+    },
+    {
+      "hours": 48,
+      "risk_score": 77
+    },
+    {
+      "hours": 72,
+      "risk_score": 72
+    }
+  ],
+  "action_plan": {
+    "do_now": [
+      "Trigger high-risk protocol and notify field supervisor.",
+      "Start preventive blight spray schedule based on local advisory guidance.",
+      "Improve field drainage and avoid dense canopy humidity pockets."
+    ],
+    "today": [
+      "Increase field scouting frequency to twice daily.",
+      "Improve air circulation and avoid overhead irrigation.",
+      "Capture geo-tagged photos and lesion notes from scouting zones."
+    ],
+    "this_week": [
+      "Review disease progression trend and recalibrate intervention thresholds.",
+      "Validate fungicide rotation and compliance with local advisory rules."
+    ]
+  }
+}

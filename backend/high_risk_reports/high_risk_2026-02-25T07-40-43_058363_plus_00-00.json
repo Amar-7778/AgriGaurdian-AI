@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-02-25T07:40:43.058363+00:00",
+  "temperature": 32.05,
+  "humidity": 80.18,
+  "rain_forecast": 0.98,
+  "soil_moisture": 43.92,
+  "wind_speed": 0.63,
+  "leaf_wetness": 91.59,
+  "soil_temperature": 29.22,
+  "soil_ph": 6.09,
+  "solar_radiation": 92.69,
+  "crop_type": "tomato",
+  "rolling_temp_avg": 24.7,
+  "rolling_humidity_avg": 71.04,
+  "rolling_leaf_wetness_avg": 65.49,
+  "humidity_alert": true,
+  "weather_condition": "Stable",
+  "anomaly_score": 3.038,
+  "risk_score": 91,
+  "risk_level": "HIGH",
+  "reasons": [
+    "Humidity is above 80%, creating fungal-friendly conditions.",
+    "Rain is forecasted, increasing leaf wetness duration.",
+    "Leaf wetness is elevated, increasing fungal germination likelihood.",
+    "Low wind speed can reduce canopy drying.",
+    "Low solar radiation with high humidity may prolong canopy wetness.",
+    "Recent sensor pattern deviates from rolling baseline."
+  ],
+  "suggested_actions": [
+    "Increase field scouting frequency to twice daily.",
+    "Improve air circulation and avoid overhead irrigation.",
+    "Prepare targeted fungicide plan based on local agronomy guidance."
+  ],
+  "predicted_disease": "Early blight (Alternaria) risk",
+  "disease_confidence": 77,
+  "disease_suggestions": [
+    "Remove infected lower leaves and sanitize tools after handling plants.",
+    "Use preventive fungicide strategy with active ingredient rotation.",
+    "Avoid overhead irrigation in late afternoon and evening."
+  ]
+}

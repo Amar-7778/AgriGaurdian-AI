@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-02-25T07:34:17.683831+00:00",
+  "temperature": 27.38,
+  "humidity": 92.55,
+  "rain_forecast": 0.95,
+  "soil_moisture": 75.03,
+  "wind_speed": 7.39,
+  "leaf_wetness": 88.47,
+  "soil_temperature": 26.16,
+  "soil_ph": 6.25,
+  "solar_radiation": 359.26,
+  "crop_type": "rice",
+  "rolling_temp_avg": 27.17,
+  "rolling_humidity_avg": 67.76,
+  "rolling_leaf_wetness_avg": 64.48,
+  "humidity_alert": true,
+  "weather_condition": "Wet-Warm",
+  "anomaly_score": 3.644,
+  "risk_score": 100,
+  "risk_level": "HIGH",
+  "reasons": [
+    "Humidity is above 80%, creating fungal-friendly conditions.",
+    "Temperature is in the 20\u201330\u00b0C fungal growth range.",
+    "Rain is forecasted, increasing leaf wetness duration.",
+    "Leaf wetness is elevated, increasing fungal germination likelihood.",
+    "Soil moisture is high, supporting pathogen persistence.",
+    "Soil temperature supports disease development dynamics.",
+    "Recent sensor pattern deviates from rolling baseline."
+  ],
+  "suggested_actions": [
+    "Increase field scouting frequency to twice daily.",
+    "Improve air circulation and avoid overhead irrigation.",
+    "Prepare targeted fungicide plan based on local agronomy guidance."
+  ],
+  "predicted_disease": "Rice blast risk",
+  "disease_confidence": 85,
+  "disease_suggestions": [
+    "Avoid excess nitrogen applications during high-risk humid windows.",
+    "Maintain optimal spacing and water management to limit prolonged wetness.",
+    "Apply targeted fungicide only when threshold is confirmed by local guidelines."
+  ]
+}

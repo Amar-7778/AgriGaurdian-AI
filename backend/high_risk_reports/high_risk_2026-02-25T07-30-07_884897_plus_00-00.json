@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-02-25T07:30:07.884897+00:00",
+  "temperature": 21.03,
+  "humidity": 76.3,
+  "rain_forecast": 0.96,
+  "soil_moisture": 74.74,
+  "wind_speed": 3.12,
+  "leaf_wetness": 77.39,
+  "soil_temperature": 19.31,
+  "soil_ph": 5.1,
+  "solar_radiation": 216.49,
+  "crop_type": "potato",
+  "rolling_temp_avg": 24.35,
+  "rolling_humidity_avg": 70.99,
+  "rolling_leaf_wetness_avg": 64.8,
+  "humidity_alert": false,
+  "weather_condition": "Stable",
+  "anomaly_score": 1.814,
+  "risk_score": 92,
+  "risk_level": "HIGH",
+  "reasons": [
+    "Temperature is in the 20\u201330\u00b0C fungal growth range.",
+    "Rain is forecasted, increasing leaf wetness duration.",
+    "Leaf wetness is elevated, increasing fungal germination likelihood.",
+    "Soil moisture is high, supporting pathogen persistence.",
+    "Soil temperature supports disease development dynamics.",
+    "Soil pH is outside the preferred range, increasing plant stress.",
+    "Recent sensor pattern deviates from rolling baseline."
+  ],
+  "suggested_actions": [
+    "Increase field scouting frequency to twice daily.",
+    "Improve air circulation and avoid overhead irrigation.",
+    "Prepare targeted fungicide plan based on local agronomy guidance."
+  ],
+  "predicted_disease": "General moisture stress",
+  "disease_confidence": 78,
+  "disease_suggestions": [
+    "Inspect the lower canopy for early lesions and discoloration.",
+    "Reduce prolonged leaf wetness by improving airflow and irrigation timing."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-02-25T07:31:04.123777+00:00",
+  "temperature": 27.9,
+  "humidity": 87.53,
+  "rain_forecast": 0.72,
+  "soil_moisture": 61.85,
+  "wind_speed": 5.98,
+  "leaf_wetness": 79.37,
+  "soil_temperature": 27.07,
+  "soil_ph": 6.5,
+  "solar_radiation": 455.59,
+  "crop_type": "maize",
+  "rolling_temp_avg": 25.69,
+  "rolling_humidity_avg": 73.08,
+  "rolling_leaf_wetness_avg": 64.76,
+  "humidity_alert": true,
+  "weather_condition": "Wet-Warm",
+  "anomaly_score": 2.017,
+  "risk_score": 98,
+  "risk_level": "HIGH",
+  "reasons": [
+    "Humidity is above 80%, creating fungal-friendly conditions.",
+    "Temperature is in the 20\u201330\u00b0C fungal growth range.",
+    "Rain is forecasted, increasing leaf wetness duration.",
+    "Leaf wetness is elevated, increasing fungal germination likelihood.",
+    "Soil temperature supports disease development dynamics.",
+    "Recent sensor pattern deviates from rolling baseline."
+  ],
+  "suggested_actions": [
+    "Increase field scouting frequency to twice daily.",
+    "Improve air circulation and avoid overhead irrigation.",
+    "Prepare targeted fungicide plan based on local agronomy guidance."
+  ],
+  "predicted_disease": "Northern leaf blight risk",
+  "disease_confidence": 83,
+  "disease_suggestions": [
+    "Scout for elongated gray-green lesions in lower to mid canopy.",
+    "Improve residue management and maintain field airflow.",
+    "Use targeted fungicide only if disease pressure escalates and thresholds are met."
+  ]
+}

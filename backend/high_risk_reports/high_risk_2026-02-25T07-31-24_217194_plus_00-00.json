@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-02-25T07:31:24.217194+00:00",
+  "temperature": 31.52,
+  "humidity": 81.36,
+  "rain_forecast": 0.22,
+  "soil_moisture": 80.52,
+  "wind_speed": 1.03,
+  "leaf_wetness": 70.14,
+  "soil_temperature": 28.27,
+  "soil_ph": 6.8,
+  "solar_radiation": 812.3,
+  "crop_type": "tomato",
+  "rolling_temp_avg": 25.68,
+  "rolling_humidity_avg": 71.35,
+  "rolling_leaf_wetness_avg": 62.65,
+  "humidity_alert": true,
+  "weather_condition": "Stable",
+  "anomaly_score": 2.468,
+  "risk_score": 75,
+  "risk_level": "HIGH",
+  "reasons": [
+    "Humidity is above 80%, creating fungal-friendly conditions.",
+    "Leaf wetness is elevated, increasing fungal germination likelihood.",
+    "Soil moisture is high, supporting pathogen persistence.",
+    "Low wind speed can reduce canopy drying.",
+    "Recent sensor pattern deviates from rolling baseline."
+  ],
+  "suggested_actions": [
+    "Increase field scouting frequency to twice daily.",
+    "Improve air circulation and avoid overhead irrigation.",
+    "Prepare targeted fungicide plan based on local agronomy guidance."
+  ],
+  "predicted_disease": "General moisture stress",
+  "disease_confidence": 63,
+  "disease_suggestions": [
+    "Inspect the lower canopy for early lesions and discoloration.",
+    "Reduce prolonged leaf wetness by improving airflow and irrigation timing."
+  ]
+}

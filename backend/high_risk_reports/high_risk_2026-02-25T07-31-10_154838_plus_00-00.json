@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-02-25T07:31:10.154838+00:00",
+  "temperature": 20.21,
+  "humidity": 88.76,
+  "rain_forecast": 0.11,
+  "soil_moisture": 60.32,
+  "wind_speed": 0.73,
+  "leaf_wetness": 75.02,
+  "soil_temperature": 18.08,
+  "soil_ph": 5.13,
+  "solar_radiation": 250.4,
+  "crop_type": "potato",
+  "rolling_temp_avg": 25.88,
+  "rolling_humidity_avg": 72.25,
+  "rolling_leaf_wetness_avg": 63.57,
+  "humidity_alert": true,
+  "weather_condition": "Stable",
+  "anomaly_score": 2.373,
+  "risk_score": 100,
+  "risk_level": "HIGH",
+  "reasons": [
+    "Humidity is above 80%, creating fungal-friendly conditions.",
+    "Temperature is in the 20\u201330\u00b0C fungal growth range.",
+    "Leaf wetness is elevated, increasing fungal germination likelihood.",
+    "Low wind speed can reduce canopy drying.",
+    "Soil temperature supports disease development dynamics.",
+    "Soil pH is outside the preferred range, increasing plant stress.",
+    "Low solar radiation with high humidity may prolong canopy wetness.",
+    "Recent sensor pattern deviates from rolling baseline."
+  ],
+  "suggested_actions": [
+    "Increase field scouting frequency to twice daily.",
+    "Improve air circulation and avoid overhead irrigation.",
+    "Prepare targeted fungicide plan based on local agronomy guidance."
+  ],
+  "predicted_disease": "Late blight risk",
+  "disease_confidence": 85,
+  "disease_suggestions": [
+    "Start preventive blight spray schedule based on local advisory guidance.",
+    "Improve field drainage and avoid dense canopy humidity pockets.",
+    "Scout high-risk zones twice daily after rainfall windows."
+  ]
+}

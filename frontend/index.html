@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriGuardian AI</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg-2: #0f172a;
+      --panel: rgba(15, 23, 42, 0.78);
+      --panel-2: rgba(30, 41, 59, 0.7);
+      --border: rgba(148, 163, 184, 0.2);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+      --accent: #38bdf8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Segoe UI, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 500px at 10% -5%, rgba(56, 189, 248, 0.15), transparent 60%),
+        radial-gradient(1000px 450px at 95% -10%, rgba(14, 165, 233, 0.10), transparent 65%),
+        linear-gradient(140deg, var(--bg), var(--bg-2));
+      color: var(--text);
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: .2px;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .subtitle {
+      color: var(--muted);
+      margin-top: 6px;
+      font-size: 14px;
+    }
+    .live-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      color: #cbd5e1;
+      white-space: nowrap;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--ok);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 12px 30px rgba(2, 6, 23, 0.35);
+    }
+    .card h3 {
+      margin: 0 0 12px 0;
+      font-size: 16px;
+      letter-spacing: .2px;
+      color: #dbeafe;
+    }
+    .span-8 { grid-column: span 8; }
+    .span-4 { grid-column: span 4; }
+    .span-12 { grid-column: span 12; }
+    .sensors {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .sensor-box {
+      background: var(--panel-2);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .k {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .55px;
+    }
+    .v {
+      font-size: 22px;
+      margin-top: 6px;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .risk-meter {
+      background: rgba(15, 23, 42, 0.8);
+      height: 18px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      margin-top: 12px;
+    }
+    .risk-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--ok);
+      transition: width .4s ease, background .4s ease;
+    }
+    .risk-pill {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+    #alerts {
+      max-height: 220px;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-right: 2px;
+    }
+    .alert-item {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.33);
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 13px;
+    }
+    canvas {
+      width: 100%;
+      height: 220px;
+      background: rgba(15, 23, 42, 0.78);
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+    .chat-wrap {
+      display: grid;
+      grid-template-rows: 260px auto;
+      gap: 10px;
+    }
+    #chatLog {
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 10px;
+      padding: 10px;
+      overflow: auto;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .msg { margin-bottom: 10px; }
+    .user { color: #93c5fd; }
+    .bot { color: #bbf7d0; }
+    .chat-input {
+      display: flex;
+      gap: 8px;
+    }
+    input, button {
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text);
+      padding: 10px;
+    }
+    input:focus {
+      outline: none;
+      border-color: rgba(56, 189, 248, 0.9);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+    input { flex: 1; }
+    button {
+      cursor: pointer;
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      border-color: #0284c7;
+      color: #f8fafc;
+      font-weight: 600;
+    }
+    button:hover { filter: brightness(1.08); }
+    @media (max-width: 980px) {
+      .span-8, .span-4, .span-12 { grid-column: span 12; }
+      .sensors { grid-template-columns: repeat(2, 1fr); }
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div>
+        <h1>AgriGuardian AI</h1>
+        <div class="subtitle">Real-time crop disease early warning dashboard</div>
+      </div>
+      <div class="live-chip">
+        <span class="dot" id="liveDot"></span>
+        <span id="liveStatus">Live Stream Connected</span>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card span-8">
+        <h3>Live Sensor Data</h3>
+        <div class="sensors">
+          <div class="sensor-box"><div class="k">Temperature</div><div class="v" id="temperature">-</div></div>
+          <div class="sensor-box"><div class="k">Humidity</div><div class="v" id="humidity">-</div></div>
+          <div class="sensor-box"><div class="k">Rain Forecast</div><div class="v" id="rain">-</div></div>
+          <div class="sensor-box"><div class="k">Soil Moisture</div><div class="v" id="soil">-</div></div>
+          <div class="sensor-box"><div class="k">Wind Speed</div><div class="v" id="wind">-</div></div>
+          <div class="sensor-box"><div class="k">Leaf Wetness</div><div class="v" id="leafWetness">-</div></div>
+          <div class="sensor-box"><div class="k">Soil Temp</div><div class="v" id="soilTemp">-</div></div>
+          <div class="sensor-box"><div class="k">Soil pH</div><div class="v" id="soilPh">-</div></div>
+          <div class="sensor-box"><div class="k">Solar Radiation</div><div class="v" id="solar">-</div></div>
+          <div class="sensor-box"><div class="k">Crop Type</div><div class="v" id="crop">-</div></div>
+        </div>
+      </div>
+
+      <div class="card span-4">
+        <h3>Disease Risk</h3>
+        <div id="riskScore" class="v">0</div>
+        <div class="risk-meter"><div id="riskFill" class="risk-fill"></div></div>
+        <div id="riskLevel" class="risk-pill">LOW</div>
+        <div style="margin-top: 10px; font-size: 13px; color: var(--muted);" id="weatherCondition"></div>
+        <div style="margin-top: 8px; font-size: 12px; color: var(--muted);" id="lastUpdated">Last update: --</div>
+      </div>
+
+      <div class="card span-4">
+        <h3>Disease Forecast</h3>
+        <div class="k">Predicted Disease</div>
+        <div style="font-size: 18px; font-weight: 700; margin-top: 6px; color: #f8fafc;" id="predictedDisease">-</div>
+        <div style="margin-top: 10px; font-size: 13px; color: var(--muted);" id="diseaseConfidence">Confidence: --</div>
+        <div style="margin-top: 8px; font-size: 13px; color: var(--muted);" id="outbreakETA">Outbreak ETA: --</div>
+        <div style="margin-top: 8px; font-size: 13px; color: #cbd5e1;" id="outbreakWindow">--</div>
+        <canvas id="forecastChart" width="360" height="130" style="margin-top: 10px; height: 130px;"></canvas>
+        <div class="k" style="margin-top: 12px;">Targeted Suggestions</div>
+        <ul id="diseaseSuggestions" style="margin: 8px 0 0 18px; padding: 0; font-size: 13px; color: #cbd5e1;"></ul>
+      </div>
+
+      <div class="card span-4">
+        <h3>Action Planner</h3>
+        <div class="k">Do Now</div>
+        <ul id="doNowList" style="margin: 8px 0 10px 18px; padding: 0; font-size: 13px; color: #cbd5e1;"></ul>
+        <div class="k">Today</div>
+        <ul id="todayList" style="margin: 8px 0 10px 18px; padding: 0; font-size: 13px; color: #cbd5e1;"></ul>
+        <div class="k">This Week</div>
+        <ul id="weekList" style="margin: 8px 0 0 18px; padding: 0; font-size: 13px; color: #cbd5e1;"></ul>
+      </div>
+
+      <div class="card span-8">
+        <h3>Real-time Risk Graph</h3>
+        <canvas id="riskChart" width="860" height="220"></canvas>
+      </div>
+
+      <div class="card span-4">
+        <h3>Alerts</h3>
+        <div id="alerts"></div>
+      </div>
+
+      <div class="card span-12">
+        <h3>RAG AI Farming Assistant</h3>
+        <div class="chat-wrap">
+          <div id="chatLog"></div>
+          <div class="chat-input">
+            <input id="chatInput" placeholder="Ask: Why is disease risk high?" />
+            <button id="chatBtn">Ask</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const ids = {
+    temperature: document.getElementById('temperature'),
+    humidity: document.getElementById('humidity'),
+    rain: document.getElementById('rain'),
+    soil: document.getElementById('soil'),
+    wind: document.getElementById('wind'),
+    leafWetness: document.getElementById('leafWetness'),
+    soilTemp: document.getElementById('soilTemp'),
+    soilPh: document.getElementById('soilPh'),
+    solar: document.getElementById('solar'),
+    crop: document.getElementById('crop'),
+    riskScore: document.getElementById('riskScore'),
+    riskFill: document.getElementById('riskFill'),
+    riskLevel: document.getElementById('riskLevel'),
+    weatherCondition: document.getElementById('weatherCondition'),
+    alerts: document.getElementById('alerts'),
+    chatLog: document.getElementById('chatLog'),
+    chatInput: document.getElementById('chatInput'),
+    chatBtn: document.getElementById('chatBtn'),
+    liveStatus: document.getElementById('liveStatus'),
+    liveDot: document.getElementById('liveDot'),
+    lastUpdated: document.getElementById('lastUpdated'),
+    predictedDisease: document.getElementById('predictedDisease'),
+    diseaseConfidence: document.getElementById('diseaseConfidence'),
+    outbreakETA: document.getElementById('outbreakETA'),
+    outbreakWindow: document.getElementById('outbreakWindow'),
+    diseaseSuggestions: document.getElementById('diseaseSuggestions'),
+    doNowList: document.getElementById('doNowList'),
+    todayList: document.getElementById('todayList'),
+    weekList: document.getElementById('weekList'),
+    forecastChart: document.getElementById('forecastChart'),
+  };
+
+  const riskSeries = [];
+  const maxPoints = 60;
+
+  function addChat(role, text) {
+    const div = document.createElement('div');
+    div.className = `msg ${role}`;
+    div.textContent = `${role === 'user' ? 'You' : 'AgriGuardian'}: ${text}`;
+    ids.chatLog.appendChild(div);
+    ids.chatLog.scrollTop = ids.chatLog.scrollHeight;
+  }
+
+  function setRisk(score, level) {
+    ids.riskScore.textContent = `${score}/100`;
+    ids.riskFill.style.width = `${score}%`;
+    ids.riskLevel.textContent = level;
+
+    let color = '#22c55e';
+    if (level === 'MEDIUM') color = '#f59e0b';
+    if (level === 'HIGH') color = '#ef4444';
+    ids.riskFill.style.background = color;
+  }
+
+  function renderAlerts(alerts) {
+    ids.alerts.innerHTML = '';
+    alerts.slice(-8).reverse().forEach(a => {
+      const el = document.createElement('div');
+      el.className = 'alert-item';
+      el.textContent = `${new Date(a.timestamp).toLocaleTimeString()} - ${a.message}`;
+      ids.alerts.appendChild(el);
+    });
+  }
+
+  function setList(listEl, items) {
+    listEl.innerHTML = '';
+    (items || []).slice(0, 4).forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      listEl.appendChild(li);
+    });
+    if (!items || items.length === 0) {
+      const li = document.createElement('li');
+      li.textContent = '-';
+      listEl.appendChild(li);
+    }
+  }
+
+  function drawForecastChart(points) {
+    const c = ids.forecastChart;
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    const w = c.width;
+    const h = c.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const trajectory = (points && points.length)
+      ? points
+      : [
+          { hours: 12, risk_score: 20 },
+          { hours: 24, risk_score: 18 },
+          { hours: 48, risk_score: 15 },
+          { hours: 72, risk_score: 12 },
+        ];
+
+    ctx.strokeStyle = '#1f2937';
+    ctx.lineWidth = 1;
+    [0, 25, 50, 75, 100].forEach(v => {
+      const y = h - (v / 100) * h;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(w, y);
+      ctx.stroke();
+    });
+
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    trajectory.forEach((p, i) => {
+      const x = (i / (trajectory.length - 1)) * (w - 10) + 5;
+      const y = h - (p.risk_score / 100) * h;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+
+    ctx.fillStyle = '#7dd3fc';
+    trajectory.forEach((p, i) => {
+      const x = (i / (trajectory.length - 1)) * (w - 10) + 5;
+      const y = h - (p.risk_score / 100) * h;
+      ctx.beginPath();
+      ctx.arc(x, y, 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '10px Segoe UI';
+      ctx.fillText(`${p.hours}h`, x - 8, h - 4);
+      ctx.fillStyle = '#7dd3fc';
+    });
+  }
+
+  function updateTelemetry(p) {
+    ids.temperature.textContent = `${p.temperature?.toFixed?.(1) ?? p.temperature} °C`;
+    ids.humidity.textContent = `${p.humidity?.toFixed?.(1) ?? p.humidity} %`;
+    ids.rain.textContent = `${Math.round((p.rain_forecast || 0) * 100)} %`;
+    ids.soil.textContent = `${p.soil_moisture?.toFixed?.(1) ?? p.soil_moisture} %`;
+    ids.wind.textContent = `${p.wind_speed?.toFixed?.(1) ?? p.wind_speed} m/s`;
+    ids.leafWetness.textContent = `${p.leaf_wetness?.toFixed?.(1) ?? p.leaf_wetness} %`;
+    ids.soilTemp.textContent = `${p.soil_temperature?.toFixed?.(1) ?? p.soil_temperature} °C`;
+    ids.soilPh.textContent = `${p.soil_ph?.toFixed?.(2) ?? p.soil_ph}`;
+    ids.solar.textContent = `${Math.round(p.solar_radiation ?? 0)} W/m²`;
+    ids.crop.textContent = p.crop_type || '-';
+    ids.weatherCondition.textContent = `Weather condition: ${p.weather_condition || 'Unknown'}`;
+    ids.lastUpdated.textContent = `Last update: ${new Date().toLocaleTimeString()}`;
+    ids.predictedDisease.textContent = p.predicted_disease || '-';
+    ids.diseaseConfidence.textContent = `Confidence: ${p.disease_confidence ?? '--'}%`;
+    ids.outbreakETA.textContent = `Outbreak ETA: ${p.outbreak_eta_hours ?? '--'} hours`;
+    ids.outbreakWindow.textContent = p.outbreak_window || '--';
+    drawForecastChart(p.forecast_trajectory || []);
+    setList(ids.diseaseSuggestions, p.disease_suggestions || []);
+    setList(ids.doNowList, p.action_plan?.do_now || []);
+    setList(ids.todayList, p.action_plan?.today || []);
+    setList(ids.weekList, p.action_plan?.this_week || []);
+    setRisk(p.risk_score || 0, p.risk_level || 'LOW');
+
+    riskSeries.push(p.risk_score || 0);
+    if (riskSeries.length > maxPoints) riskSeries.shift();
+    drawChart();
+  }
+
+  function drawChart() {
+    const c = document.getElementById('riskChart');
+    const ctx = c.getContext('2d');
+    const w = c.width;
+    const h = c.height;
+
+    ctx.clearRect(0, 0, w, h);
+
+    ctx.strokeStyle = '#1f2937';
+    ctx.lineWidth = 1;
+    for (let y = 0; y <= 100; y += 25) {
+      const py = h - (y / 100) * h;
+      ctx.beginPath();
+      ctx.moveTo(0, py);
+      ctx.lineTo(w, py);
+      ctx.stroke();
+    }
+
+    if (riskSeries.length < 2) return;
+
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    riskSeries.forEach((v, i) => {
+      const x = (i / (maxPoints - 1)) * w;
+      const y = h - (v / 100) * h;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+  }
+
+  async function initState() {
+    const res = await fetch('/api/state');
+    const data = await res.json();
+    if (data.latest && Object.keys(data.latest).length) updateTelemetry(data.latest);
+    renderAlerts(data.alerts || []);
+    (data.history || []).forEach(x => riskSeries.push(x.risk_score || 0));
+    while (riskSeries.length > maxPoints) riskSeries.shift();
+    drawChart();
+  }
+
+  function initSocket() {
+    const scheme = location.protocol === 'https:' ? 'wss' : 'ws';
+    const ws = new WebSocket(`${scheme}://${location.host}/ws`);
+
+    ws.onopen = () => {
+      ids.liveStatus.textContent = 'Live Stream Connected';
+      ids.liveDot.style.background = '#22c55e';
+      ids.liveDot.style.boxShadow = '0 0 0 4px rgba(34, 197, 94, 0.2)';
+    };
+
+    ws.onclose = () => {
+      ids.liveStatus.textContent = 'Reconnecting...';
+      ids.liveDot.style.background = '#f59e0b';
+      ids.liveDot.style.boxShadow = '0 0 0 4px rgba(245, 158, 11, 0.2)';
+    };
+
+    ws.onerror = () => {
+      ids.liveStatus.textContent = 'Connection issue';
+      ids.liveDot.style.background = '#ef4444';
+      ids.liveDot.style.boxShadow = '0 0 0 4px rgba(239, 68, 68, 0.2)';
+    };
+
+    ws.onmessage = evt => {
+      const msg = JSON.parse(evt.data);
+      if (msg.type === 'telemetry') updateTelemetry(msg.payload);
+      if (msg.type === 'alert') {
+        const existing = Array.from(ids.alerts.children).map(x => x.textContent);
+        const text = `${new Date(msg.payload.timestamp).toLocaleTimeString()} - ${msg.payload.message}`;
+        if (!existing.includes(text)) {
+          const el = document.createElement('div');
+          el.className = 'alert-item';
+          el.textContent = text;
+          ids.alerts.prepend(el);
+          while (ids.alerts.children.length > 8) ids.alerts.removeChild(ids.alerts.lastChild);
+        }
+      }
+    };
+
+    setInterval(() => {
+      if (ws.readyState === 1) ws.send('ping');
+    }, 15000);
+  }
+
+  async function askQuestion() {
+    const q = ids.chatInput.value.trim();
+    if (!q) return;
+    ids.chatInput.value = '';
+    addChat('user', q);
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: q }),
+      });
+      const data = await res.json();
+      const suffix = (data.sources && data.sources.length)
+        ? ` (sources: ${data.sources.join(', ')})`
+        : '';
+      addChat('bot', `${data.answer}${suffix}`);
+    } catch {
+      addChat('bot', 'Unable to answer right now.');
+    }
+  }
+
+  ids.chatBtn.addEventListener('click', askQuestion);
+  ids.chatInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') askQuestion();
+  });
+
+  initState();
+  initSocket();
+  addChat('bot', 'I am ready. Ask about current disease risk and preventive actions.');
+</script>
+</body>
+</html>
