@@ -1,0 +1,77 @@
+{
+  "timestamp": "2026-02-25T10:49:44.722988+00:00",
+  "temperature": 22.48,
+  "humidity": 82.67,
+  "rain_forecast": 0.19,
+  "soil_moisture": 41.25,
+  "wind_speed": 5.61,
+  "leaf_wetness": 62.5,
+  "soil_temperature": 19.42,
+  "soil_ph": 7.21,
+  "solar_radiation": 118.99,
+  "crop_type": "wheat",
+  "rolling_temp_avg": 25.85,
+  "rolling_humidity_avg": 66.56,
+  "rolling_leaf_wetness_avg": 61.97,
+  "humidity_alert": true,
+  "weather_condition": "Stable",
+  "anomaly_score": 1.731,
+  "risk_score": 79,
+  "risk_level": "HIGH",
+  "reasons": [
+    "Humidity is above 80%, creating fungal-friendly conditions.",
+    "Temperature is in the 20\u201330\u00b0C fungal growth range.",
+    "Soil temperature supports disease development dynamics.",
+    "Soil pH is outside the preferred range, increasing plant stress.",
+    "Low solar radiation with high humidity may prolong canopy wetness.",
+    "Recent sensor pattern deviates from rolling baseline."
+  ],
+  "suggested_actions": [
+    "Increase field scouting frequency to twice daily.",
+    "Improve air circulation and avoid overhead irrigation.",
+    "Prepare targeted fungicide plan based on local agronomy guidance."
+  ],
+  "predicted_disease": "Leaf rust risk",
+  "disease_confidence": 68,
+  "disease_suggestions": [
+    "Increase scouting around dense and shaded sections of the field.",
+    "Prioritize resistant varieties and timely foliar protection if thresholds are met.",
+    "Avoid unnecessary late irrigation that increases canopy humidity."
+  ],
+  "outbreak_eta_hours": 7,
+  "outbreak_window": "Critical window: within 12 hours",
+  "forecast_trajectory": [
+    {
+      "hours": 12,
+      "risk_score": 82
+    },
+    {
+      "hours": 24,
+      "risk_score": 79
+    },
+    {
+      "hours": 48,
+      "risk_score": 74
+    },
+    {
+      "hours": 72,
+      "risk_score": 69
+    }
+  ],
+  "action_plan": {
+    "do_now": [
+      "Trigger high-risk protocol and notify field supervisor.",
+      "Increase scouting around dense and shaded sections of the field.",
+      "Prioritize resistant varieties and timely foliar protection if thresholds are met."
+    ],
+    "today": [
+      "Increase field scouting frequency to twice daily.",
+      "Improve air circulation and avoid overhead irrigation.",
+      "Capture geo-tagged photos and lesion notes from scouting zones."
+    ],
+    "this_week": [
+      "Review disease progression trend and recalibrate intervention thresholds.",
+      "Validate fungicide rotation and compliance with local advisory rules."
+    ]
+  }
+}

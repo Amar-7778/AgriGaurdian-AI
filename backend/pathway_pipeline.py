@@ -1,3 +1,5 @@
+"""Legacy pathway pipeline kept for backward compatibility."""
+
 from __future__ import annotations
 
 from collections import deque
@@ -5,94 +7,31 @@ from dataclasses import dataclass
 from statistics import mean
 from typing import Any
 
-
-@dataclass
-class ProcessedReading:
-    temperature: float
-    humidity: float
-    rain_forecast: float
-    soil_moisture: float
-    wind_speed: float
-    leaf_wetness: float
-    soil_temperature: float
-    soil_ph: float
-    solar_radiation: float
-    crop_type: str
-    rolling_temp_avg: float
-    rolling_humidity_avg: float
-    rolling_leaf_wetness_avg: float
-    humidity_alert: bool
-    weather_condition: str
-    anomaly_score: float
+# Import from new ETL pipeline
+from .etl_pipeline import ProcessedReading, PathwayETLPipeline
 
 
 class StreamingFeaturePipeline:
+    """
+    Backward-compatible wrapper around PathwayETLPipeline.
+    Maintains original interface while using new Pathway-based ETL system.
+    """
+
     def __init__(self, window_size: int = 12) -> None:
         self.window_size = window_size
+        self.etl_pipeline = PathwayETLPipeline(window_size=window_size)
         self.temperature_window: deque[float] = deque(maxlen=window_size)
         self.humidity_window: deque[float] = deque(maxlen=window_size)
         self.soil_window: deque[float] = deque(maxlen=window_size)
         self.leaf_wetness_window: deque[float] = deque(maxlen=window_size)
 
     def process(self, payload: dict[str, Any]) -> ProcessedReading:
-        temperature = float(payload["temperature"])
-        humidity = float(payload["humidity"])
-        rain_forecast = float(payload["rain_forecast"])
-        soil_moisture = float(payload["soil_moisture"])
-        wind_speed = float(payload["wind_speed"])
-        leaf_wetness = float(payload["leaf_wetness"])
-        soil_temperature = float(payload["soil_temperature"])
-        soil_ph = float(payload["soil_ph"])
-        solar_radiation = float(payload["solar_radiation"])
-        crop_type = str(payload["crop_type"])
-
-        self.temperature_window.append(temperature)
-        self.humidity_window.append(humidity)
-        self.soil_window.append(soil_moisture)
-        self.leaf_wetness_window.append(leaf_wetness)
-
-        rolling_temp_avg = mean(self.temperature_window)
-        rolling_humidity_avg = mean(self.humidity_window)
-        rolling_soil_avg = mean(self.soil_window)
-        rolling_leaf_wetness_avg = mean(self.leaf_wetness_window)
-
-        humidity_alert = humidity > 80 or rolling_humidity_avg > 78
-
-        if humidity_alert and leaf_wetness > 70 and rain_forecast > 0.6 and 20 <= temperature <= 30:
-            weather_condition = "Wet-Warm"
-        elif temperature > 32 and humidity < 45 and solar_radiation > 650:
-            weather_condition = "Heat-Dry"
-        else:
-            weather_condition = "Stable"
-
-        anomaly_score = (
-            abs(temperature - rolling_temp_avg) / 10
-            + abs(humidity - rolling_humidity_avg) / 20
-            + abs(soil_moisture - rolling_soil_avg) / 20
-            + abs(leaf_wetness - rolling_leaf_wetness_avg) / 20
-        )
-
-        return ProcessedReading(
-            temperature=temperature,
-            humidity=humidity,
-            rain_forecast=rain_forecast,
-            soil_moisture=soil_moisture,
-            wind_speed=wind_speed,
-            leaf_wetness=leaf_wetness,
-            soil_temperature=soil_temperature,
-            soil_ph=soil_ph,
-            solar_radiation=solar_radiation,
-            crop_type=crop_type,
-            rolling_temp_avg=round(rolling_temp_avg, 2),
-            rolling_humidity_avg=round(rolling_humidity_avg, 2),
-            rolling_leaf_wetness_avg=round(rolling_leaf_wetness_avg, 2),
-            humidity_alert=humidity_alert,
-            weather_condition=weather_condition,
-            anomaly_score=round(anomaly_score, 3),
-        )
+        """Process event through the ETL pipeline."""
+        return self.etl_pipeline._process_single_event(payload)
 
 
 def pathway_streaming_table_example() -> None:
+    """Example of using Pathway's streaming table API for reference."""
     import pathway as pw
 
     class SensorSchema(pw.Schema):

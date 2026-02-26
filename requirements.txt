@@ -1,5 +1,32 @@
 fastapi==0.116.1
 uvicorn[standard]==0.35.0
 pydantic==2.11.7
+
+# Pathway ETL Framework
 pathway==0.21.0
+
+# Vector Search & Embeddings
+sentence-transformers==2.6.1
+numpy==1.24.3
+scikit-learn==1.3.0
+
+# Database & ORM
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+alembic==1.13.0
+pgvector==0.2.4
+
+# LLM Integration
 openai==1.107.2
+
+# Streaming & Message Queue
+kafka-python==2.0.2
+
+# Async & Performance
+aiofiles==23.2.1
+httpx==0.25.0
+
+# Utilities
+python-dotenv==1.0.0
+pyyaml==6.0.1
+pyarrow==14.0.1
